@@ -4,9 +4,7 @@
  * @param {number} n index
  * @returns {number}
  */
-function pow(m, n) {
-    let number = m;
-
+function pow (m, n) {
     for(let i = 0; i < n; i++) {
         if (i > 0) {
             number = number * m;
