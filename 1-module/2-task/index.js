@@ -3,7 +3,7 @@
 /**
  * Эту функцию трогать не нужно
  */
-function print(text) {
+function print (text) {
     alert(text);
 }
 
@@ -11,12 +11,10 @@ function print(text) {
  * Эту функцию нужно поменять так,
  * чтобы функция sayHello работала корректно
  */
-function isValid(name) {
-    if (name == null || name.includes(' ') || name.length < 4) return false;
-    return true;
+function isValid (name) {
 }
 
-function sayHello() {
+function sayHello () {
     let userName = prompt('Введите ваше имя');
 
     if (isValid(userName)) {
