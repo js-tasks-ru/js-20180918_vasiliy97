@@ -1,36 +1,20 @@
 sudo: required
 dist: trusty
 addons:
-  artifacts:
-    paths:
-      - results
   apt:
     sources:
       - google-chrome
     packages:
       - google-chrome-stable
+
 language: node_js
+
 node_js:
-  - '7'
-cache:
-  directories:
-    - node_modules
-    - bower_components
-    - $HOME/.npm
-    - $HOME/.cache
-before_script:
-  - npm install
-before_deploy:
-  - npm run build
-env:
-  global:
-    - NODE_ENV=testing
-    - ARTIFACTS_BUCKET=js-tasks-ru
-    - secure: >-
-        rIlzbyeXoecudphEENYfVUm/vvHggudQf7bj0Q3d8uSj9j1K6GyBKMiMwGIzt0iduYBZoQB4KaFtQ/XC6A+Y/XYBdxIx7jgrprNKrE1laBuRdYSSDUfDOMrS9Q6hVo+Us2UPC+j5z0CmcpiR5hpeiERhB/CXRu2JwJ9cP5efUon+dlC9A/DzZbIfI52ttF5VFuphf2+aJ7h/Mk28shRm4Y5YEowbUYpTqxq3Twc7I4/DJQVDPDuB+CxkM0hvWiUa92d0m/ImmCorasXVNUkUq8vEFVUhfvVvuX08/zdj674JGT322MupNDNGbNLvatp8836rpInCQ6bf1mJ9dxckmlClLJqXz5pvf/jC8IcY9kpKA08u2s7G1VCcYsskPxw50UKgjeaG7nUvNjVl/dhxd9pdAZMbN33I6/Cr358k6zvtpDs7xiJE6G3vovnDPcQrwVWblWO8qLYMyFz0AQHbNq6dJ3P6OL84RO1oSbWZCnEBpRRaNIwOqppzmPvnck+8bQM+YQ/tW7rcTNAKLZcSc+hJjYz+JTiijglV3qf4x1GRsSdttty/OchhYeTAvD9yaXHWxp1a/YwrLhHNggyf7hgoF7vYjFK6V8ZLMe1UDare0GWxEnCGT604bhkdDwQOZS8PiSDF79qvx4HJUeYkWE+8gRA5tC2mQS1bjDigXug=
-    - secure: >-
-        fxDj/TCsPj+DKiALmWom3PEmuPU6GruXiP4nCSnjsRAuyjvlK1wx1xnN47uGFpstkuzJRK+i679WChSnVC/3F2lHzRznxQ/xvq1AfsmIDne3Af6+dswDZx81ccCsQJxFndUNPLceL0XNljWPRoQCnMFd44G8xOS9gk+m25GA4hwhlRgJhsrPafpqzEvXvSE72oWue+9Dj1VR8DC8ymmF+VtVzT2pD0oUqzdJMSPhsGb85QoSPDSXsbJKuNAVE00mtrgNx9bkd7As34mJUihSWVzSoCK6ejoKvDGD0TyaUPUVdZS7s1BUzgslqfHLdkkDDyCnCNvdrAJDcGQWT6DtDYX7AM3Dno1lVvQ+3aGzgxZ8fAN/YcaGDFnIyBSggNt81g9AYJTp77CERgZPLM7XZ0P2vW+FLJqDXNfZvhgDbDzN4AlQ7hYdhKCvx6hM5GxPmIsUUAipV8OIYdT7telxr2TLKnqvmT5vngsREwjC33GwW+IpKKwm9a+srCFSYnsOPk/mBlrH7k+wF+PG9jvuOdIl2URMkG2912J4XeLIxFmx81dn9PCmNWxUifR+GROk/utjsQch7JnltlXtipMJ1km+T38xd60Z2tPmaQQfO3kgWEPO20jrI1uzABGrs1Hhge7HryqnmHTyQD3DQdmqqHjpykF9DN7icw5fvSVIE4M=
+  - 10.13.0
+
 script:
-  - npm run test
+  - npm test --silent
+
 notifications:
-  webhooks: 'http://learn.javascript.ru/automation/ci/build'
+  webhooks:
+    - https://learn.javascript.ru/taskbook/travis/notifications
