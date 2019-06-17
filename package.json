@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/javascript-info/tasks-js-dom-interfaces#readme",
   "devDependencies": {
-    "babel-loader": "^8.0.6",
     "jasmine": "^2.8.0",
     "jasmine-core": "^2.8.0",
     "karma": "^1.7.1",
@@ -28,6 +27,5 @@
     "karma-jasmine": "^1.1.0",
     "karma-json-reporter": "^1.2.1",
     "karma-phantomjs-launcher": "^1.0.4"
-  },
-  "dependencies": {}
+  }
 }
