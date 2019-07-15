@@ -7,5 +7,7 @@
  */
 function extendClass(Main, Parent) {
     // здесь ваш код наследования
+    Parent.call(Main);
+    Main.prototype = Object.create(Parent.prototype);
 }
 
