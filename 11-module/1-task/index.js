@@ -28,6 +28,9 @@
 
             this.el.classList.add(this.name);
             document.body.appendChild(this.el);
+
+            this.onMouseOver = this.mouseOver.bind(this);
+            this.onMouseOut = this.mouseOut.bind(this);
         }
 
         /**
@@ -37,41 +40,41 @@
          * @param {Element} root - элемент, внутри которого, нужно включить работу подсказок
          */
         attach(root) {
-            let tooltipElem = document.body.querySelector('.tooltip');
-
-            root.onmouseover = (e) => {
-                let target = e.target;
-                let tooltip = target.getAttribute('data-tooltip');
-                if (!tooltip) return;
-
-                tooltipElem.classList.add('tooltip_active');
-                tooltipElem.innerHTML = tooltip;
-
-                let coords = target.getBoundingClientRect();
-                let windowHeight = document.documentElement.clientHeight;
-
-                let left = coords.left + (target.offsetWidth - tooltipElem.offsetWidth) / 2;
-                if (left < 0) left = 0; // не вылезать за левую границу окна
-
-                let top = coords.top + tooltipElem.offsetHeight + this.indent;
-                if (windowHeight < top) { // не вылезать за верхнюю границу окна
-                    top = coords.top - target.offsetHeight - tooltipElem.offsetHeight - this.indent;
-                }
-
-                tooltipElem.style.left = left + 'px';
-                tooltipElem.style.top = top + 'px';
-            }
-
-            root.onmouseout = (e) => {
-                tooltipElem.innerHTML = '';
-                tooltipElem.classList.remove('tooltip_active');
-            };
+            this.root = root;
+            this.root.addEventListener('mouseover', this.onMouseOver);
+            this.root.addEventListener('mouseout', this.onMouseOut);
         }
 
         /**
          * Удаляет все обработчики событий
          */
         detach() {
+            this.root.removeEventListener('mouseover', this.onMouseOver);
+            this.root.removeEventListener('mouseout', this.onMouseOut);
+        }
+
+        mouseOver(e) {
+            let target = e.target;
+            let tooltip = target.getAttribute('data-tooltip');
+            if (!tooltip) return;
+
+            this.el.classList.add('tooltip_active');
+            this.el.innerHTML = tooltip;
+
+            let coords = target.getBoundingClientRect();
+            let windowHeight = document.documentElement.clientHeight;
+
+            let top = coords.top + this.el.offsetHeight + this.indent;
+            if (windowHeight < top) { // не вылезать за верхнюю границу окна
+                top = coords.top - target.offsetHeight - this.el.offsetHeight - this.indent;
+            }
+
+            this.el.style.top = top + 'px';
+        }
+
+        mouseOut() {
+            this.el.innerHTML = '';
+            this.el.classList.remove('tooltip_active');
         }
     }
 
